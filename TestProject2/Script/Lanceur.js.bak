@@ -1,0 +1,6 @@
+﻿var file = require("file1");
+
+function Lanceur(){
+  var x = new file.Ecran("Ecran Principal");
+  Log.message("Test : " + x.getTitle());
+}
