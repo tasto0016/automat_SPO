@@ -9,7 +9,7 @@ class Ecran extends component_1.Component {
     constructor(wfo) {
         super(wfo);
         this._components = [];
-        this.parkour(wfo);
+        this.parkour(this._wfo);
     }
     getComponents() {
         return this._components;
@@ -38,6 +38,24 @@ class Ecran extends component_1.Component {
             else
                 for (let i = 0; i < nChild; i++)
                     this.parkour(wfo.Child(i));
+        }
+    }
+    parkour2(wfo) {
+        if (component_1.Component.isVisible(wfo) && wfo.Enabled) {
+            let nChild = wfo.ChildCount;
+            const type = wfo.GetType().FullName;
+            let constr = exports.componentMappings[type];
+            if (!constr) {
+                if (nChild == 0)
+                    Log.Message("Objet non reconnu", "Full name : " + wfo.Name + " est de type : " + wfo.GetType().FullName);
+                else
+                    for (let i = 0; i < nChild; i++)
+                        this.parkour(wfo.Child(i));
+            }
+            else {
+                const component = new constr(wfo);
+                this._components.push(component);
+            }
         }
     }
     brille() {

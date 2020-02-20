@@ -10,7 +10,7 @@ export class Ecran extends Component {
 
     constructor(wfo: WinForObj) {
         super(wfo);
-        this.parkour(wfo);
+        this.parkour(this._wfo);
     }
 
     public getComponents(): Component[] {
@@ -49,6 +49,23 @@ export class Ecran extends Component {
             if (nChild == 0) this.addComponent(wfo);
             else for (let i = 0; i < nChild; i++) this.parkour(wfo.Child(i));
         }
+    }
+
+    private parkour2(wfo: WinForObj): void {
+        if (Component.isVisible(wfo) && wfo.Enabled) {
+            let nChild: number = wfo.ChildCount;
+            const type = wfo.GetType().FullName;
+            let constr = componentMappings[type];
+            if (!constr) {
+                if (nChild == 0 ) Log.Message("Objet non reconnu","Full name : "+ wfo.Name + " est de type : " + wfo.GetType().FullName);
+                else for (let i = 0; i < nChild; i++) this.parkour(wfo.Child(i));
+            } else { 
+            const component = new constr(wfo);
+            this._components.push(component); 
+            }
+            
+        }
+
     }
 
     public brille(): void {

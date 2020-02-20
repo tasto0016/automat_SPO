@@ -7,6 +7,7 @@ export declare class Ecran extends Component {
     myClass(): string;
     private addComponent;
     private parkour;
+    private parkour2;
     brille(): void;
     private rechercheFromLabel;
     rechercheChamp(label: string): Component;

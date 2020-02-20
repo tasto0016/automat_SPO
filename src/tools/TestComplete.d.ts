@@ -23,6 +23,7 @@ declare abstract class WinForObj {
     public ChildCount: number;
     public Child(n: number): WinForObj;
     public GetType(): any;
+    public Enabled: boolean ;
 
     //Combobox
     public ClickItem(valeur: string) : void ;
@@ -33,8 +34,7 @@ declare abstract class WinForObj {
 
 declare abstract class Sheet {
     public getItem(n : number) : Sheet ;
-    public ColumnHeader : any ;
-
+    public ColumnHeader : any 
 
 }
 
@@ -43,5 +43,5 @@ declare class Sys {
 }
 
 declare class Log{
-    public static Message(s : string) : void ;
+    public static Message(s : string, m? : string) : void ;
 }
