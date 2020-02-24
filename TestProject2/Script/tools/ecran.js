@@ -5,6 +5,7 @@ const label_1 = require("label");
 const bouton_1 = require("bouton");
 const champ_1 = require("champ");
 const combobox_1 = require("combobox");
+const tableau_1 = require("tableau");
 class Ecran extends component_1.Component {
     constructor(wfo) {
         super(wfo);
@@ -17,46 +18,25 @@ class Ecran extends component_1.Component {
     myClass() {
         return "Ecran";
     }
-    addComponent(wfo) {
-        let wclass = wfo.WndClass;
-        if (wclass.includes("STATIC"))
-            this._components.push(new label_1.Label(wfo));
-        else if (wclass.includes("EDIT"))
-            this._components.push(new champ_1.Champ(wfo));
-        else if (wclass.includes("BUTTON"))
-            this._components.push(new bouton_1.Bouton(wfo));
-        else if (wclass.includes("COMBOBOX"))
-            this._components.push(new combobox_1.Combobox(wfo));
-        else
-            this._components.push(new component_1.Component(wfo));
-    }
     parkour(wfo) {
-        if (component_1.Component.isVisible(wfo)) {
+        const type = wfo.GetType().FullName;
+        let constr = exports.componentMappings[type];
+        if (!constr) {
             let nChild = wfo.ChildCount;
             if (nChild == 0)
-                this.addComponent(wfo);
-            else
+                Log.Message("Objet non reconnu", "Full name : " + wfo.Name + " est de type : " + type);
+            else if (component_1.Component.isVisible(wfo) && wfo.Enabled)
                 for (let i = 0; i < nChild; i++)
                     this.parkour(wfo.Child(i));
         }
-    }
-    parkour2(wfo) {
-        if (component_1.Component.isVisible(wfo) && wfo.Enabled) {
-            let nChild = wfo.ChildCount;
-            const type = wfo.GetType().FullName;
-            let constr = exports.componentMappings[type];
-            if (!constr) {
-                if (nChild == 0)
-                    Log.Message("Objet non reconnu", "Full name : " + wfo.Name + " est de type : " + wfo.GetType().FullName);
-                else
-                    for (let i = 0; i < nChild; i++)
-                        this.parkour(wfo.Child(i));
-            }
-            else {
-                const component = new constr(wfo);
-                this._components.push(component);
-            }
+        else {
+            const component = new constr(wfo);
+            this._components.push(component);
         }
+    }
+    refresh() {
+        this._components = [];
+        this.parkour(this._wfo);
     }
     brille() {
         this._components.forEach(cpmnt => {
@@ -121,5 +101,11 @@ class Ecran extends component_1.Component {
 exports.Ecran = Ecran;
 exports.componentMappings = {
     'MGDIS.N01.Comp.MGText': champ_1.Champ,
+    'MGDIS.N01.WinForms.MGTextBox': champ_1.Champ,
+    'MGDIS.N01.WinForms.MGNumericBox': champ_1.Champ,
+    'MGDIS.N01.WinForms.MGLabel': label_1.Label,
+    'MGDIS.N01.WinForms.MGComboBox': combobox_1.Combobox,
+    'System.Windows.Forms.Button': bouton_1.Bouton,
+    'FarPoint.Win.Spread.FpSpread': tableau_1.Tableau,
 };
 //# sourceMappingURL=ecran.js.map

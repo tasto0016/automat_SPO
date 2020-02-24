@@ -8,6 +8,7 @@
 			<child name="champ" key="{9C8C9F2F-EA7C-4BA7-92D1-7D7728F09DD8}" path="tools\champ.js" />
 			<child name="combobox" key="{57428969-8DF6-439E-831A-8818655E19C7}" path="tools\combobox.js" />
 			<child name="label" key="{2BC024C8-0C75-4DCC-B335-E5B093DB04B6}" path="tools\label.js" />
+			<child name="tableau" key="{F256358B-BEBD-463A-ADEF-81632127D748}" path="tools\tableau.js" />
 		</folder>
 		<folder name="scenarii" />
 		<child name="Unit1" key="{17702943-4DB3-4F98-88CA-EE356E5A0104}" path="Unit1.js" />

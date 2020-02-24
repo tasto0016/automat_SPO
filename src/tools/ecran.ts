@@ -3,6 +3,7 @@ import {Label} from 'label'
 import {Bouton} from 'bouton'
 import {Champ} from 'champ'
 import {Combobox} from 'combobox'
+import {Tableau} from 'tableau'
 
 
 export class Ecran extends Component {
@@ -21,51 +22,23 @@ export class Ecran extends Component {
         return "Ecran";
     }
 
-    private addComponent(wfo: WinForObj): void {
-
-        /*
+    private parkour(wfo: WinForObj): void {
         const type = wfo.GetType().FullName;
         let constr = componentMappings[type];
         if (!constr) {
-            constr = Component;
-            Log.Message(wfo.GetType().FullName);
-        }
-        const component = new constr(wfo);
-        this._components.push(component);
-        */
-
-        let wclass: string = wfo.WndClass;
-        if (wclass.includes("STATIC")) this._components.push(new Label(wfo));
-        else if (wclass.includes("EDIT")) this._components.push(new Champ(wfo));
-        else if (wclass.includes("BUTTON")) this._components.push(new Bouton(wfo));
-        else if (wclass.includes("COMBOBOX")) this._components.push(new Combobox(wfo));
-        else this._components.push(new Component(wfo));
-        
-    }
-
-    private parkour(wfo: WinForObj): void {
-        if (Component.isVisible(wfo)) {
             let nChild: number = wfo.ChildCount;
-            if (nChild == 0) this.addComponent(wfo);
-            else for (let i = 0; i < nChild; i++) this.parkour(wfo.Child(i));
-        }
-    }
-
-    private parkour2(wfo: WinForObj): void {
-        if (Component.isVisible(wfo) && wfo.Enabled) {
-            let nChild: number = wfo.ChildCount;
-            const type = wfo.GetType().FullName;
-            let constr = componentMappings[type];
-            if (!constr) {
-                if (nChild == 0 ) Log.Message("Objet non reconnu","Full name : "+ wfo.Name + " est de type : " + wfo.GetType().FullName);
-                else for (let i = 0; i < nChild; i++) this.parkour(wfo.Child(i));
-            } else { 
+            if (nChild == 0 ) Log.Message("Objet non reconnu","Full name : "+ wfo.Name + " est de type : " + type);            
+                else if (Component.isVisible(wfo) && wfo.Enabled) 
+                    for (let i = 0; i < nChild; i++) this.parkour(wfo.Child(i));
+        }else { 
             const component = new constr(wfo);
             this._components.push(component); 
-            }
-            
-        }
+        }                
+    }
 
+    public refresh() : void {
+        this._components = [] ;
+        this.parkour(this._wfo); 
     }
 
     public brille(): void {
@@ -140,4 +113,10 @@ export interface ComponentMapping {
 }
 export const componentMappings: ComponentMapping = {
     'MGDIS.N01.Comp.MGText': Champ,
+    'MGDIS.N01.WinForms.MGTextBox' : Champ,
+    'MGDIS.N01.WinForms.MGNumericBox' : Champ,
+    'MGDIS.N01.WinForms.MGLabel' : Label,
+    'MGDIS.N01.WinForms.MGComboBox' : Combobox,
+    'System.Windows.Forms.Button' : Bouton,
+    'FarPoint.Win.Spread.FpSpread' : Tableau,
 };

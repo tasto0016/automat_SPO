@@ -6,9 +6,13 @@ export class Tableau extends Component {
     protected _sheet : Sheet ;
 
     constructor (wfo : WinForObj){
-        super(wfo) ;
+        super(wfo) ;/*
         this._sheet = wfo.Sheets.getItem(0) ;
-        this.setColumnHeader();
+        this.setColumnHeader();*/
+    }
+
+    public brille() : void{
+        super.brille(0x000080);
     }
 
     protected setColumnHeader() : void {
@@ -24,6 +28,10 @@ export class Tableau extends Component {
 
         for (var i=0; i<n; i++){
         } 
+    }
+
+    public myClass() : string{
+        return "Tableau" ;
     }
 
 }

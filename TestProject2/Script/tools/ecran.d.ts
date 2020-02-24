@@ -5,9 +5,8 @@ export declare class Ecran extends Component {
     constructor(wfo: WinForObj);
     getComponents(): Component[];
     myClass(): string;
-    private addComponent;
     private parkour;
-    private parkour2;
+    refresh(): void;
     brille(): void;
     private rechercheFromLabel;
     rechercheChamp(label: string): Component;
