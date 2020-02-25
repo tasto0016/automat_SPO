@@ -1,14 +1,14 @@
-import { Component } from "component";
+import { Component, componentType } from "component";
 export declare class Tableau extends Component {
-    protected _headerTop: ColumnHeader;
+    protected _header: Header;
     protected _sheet: Sheet;
     constructor(wfo: WinForObj);
     brille(): void;
     protected setColumnHeader(): void;
     toString(): void;
-    myClass(): string;
+    myClass(): componentType;
 }
-interface ColumnHeader {
+interface Header {
     [columnName: string]: number;
 }
 export {};

@@ -40,6 +40,7 @@ declare abstract class Sheet {
 
 declare class Sys {
     public static HighlightObject(object: WinForObj, time: number, color: number): void;
+    public static Process(s : string): any;
 }
 
 declare class Log{

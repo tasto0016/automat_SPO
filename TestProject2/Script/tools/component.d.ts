@@ -9,5 +9,6 @@ export declare class Component {
     protected size(): number;
     positionX(): number;
     positionY(): number;
-    myClass(): string;
+    myClass(): componentType;
 }
+export declare type componentType = "Component" | "Champ" | "Bouton" | "Combobox" | "Label" | "Tableau" | "Ecran";

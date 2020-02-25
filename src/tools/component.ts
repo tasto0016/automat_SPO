@@ -20,7 +20,6 @@ export class Component {
 
     public static isVisible(wfo: WinForObj): boolean {
         return (wfo.Visible && wfo.VisibleOnScreen);
-
     }
 
     public lire(): string {
@@ -39,8 +38,10 @@ export class Component {
         return this._wfo.ScreenTop;
     }
 
-    public myClass(): string {
+    public myClass(): componentType {
         return "Component";
     }
 
 }
+
+export type componentType = "Component" | "Champ" | "Bouton" | "Combobox" | "Label" | "Tableau" | "Ecran";

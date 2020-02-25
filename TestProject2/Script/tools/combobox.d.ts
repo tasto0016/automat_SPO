@@ -1,8 +1,8 @@
-import { Component } from 'component';
+import { Component, componentType } from 'component';
 export declare class Combobox extends Component {
     constructor(wfo: WinForObj);
     copy(): Combobox;
     brille(): void;
-    myClass(): string;
+    myClass(): componentType;
     select(valeur: string): void;
 }

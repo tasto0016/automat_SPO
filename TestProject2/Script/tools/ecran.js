@@ -12,6 +12,9 @@ class Ecran extends component_1.Component {
         this._components = [];
         this.parkour(this._wfo);
     }
+    static ecranCourant() {
+        return new Ecran(Sys.Process("MGDIS.LanceurNET").WinFormsObject("FMPortail"));
+    }
     getComponents() {
         return this._components;
     }
@@ -45,6 +48,7 @@ class Ecran extends component_1.Component {
     }
     rechercheFromLabel(nameClass, label) {
         let y;
+        let x;
         let foundL = false;
         for (const component of this._components) {
             if (label_1.Label.isLabel(component) && component.is(label)) {
@@ -85,7 +89,6 @@ class Ecran extends component_1.Component {
                     aRetourner = cmpnt;
                 }
         }
-        ;
         if (!found)
             throw ("Pas trouvé de bouton au label : " + label);
         return aRetourner;

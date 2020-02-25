@@ -1,4 +1,4 @@
-import {Component} from 'component'
+import {Component, componentType} from 'component'
 
 
 export class Combobox extends Component {
@@ -13,7 +13,7 @@ export class Combobox extends Component {
         super.brille(0x00FFFF);
     }
 
-    public myClass(): string {
+    public myClass(): componentType {
         return "Combobox";
     }
 

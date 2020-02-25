@@ -1,4 +1,4 @@
-import {Component} from 'component'
+import {Component, componentType} from 'component'
 
 export class Bouton extends Component {
     constructor(wfo: WinForObj) {
@@ -13,9 +13,8 @@ export class Bouton extends Component {
         super.brille(0x00FF00);
     }
 
-    public myClass(): string {
+    public myClass(): componentType {
         return "Bouton";
     }
-
 
 }

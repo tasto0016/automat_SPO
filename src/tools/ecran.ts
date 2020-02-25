@@ -1,4 +1,4 @@
-import {Component} from 'component'
+import {Component, componentType} from 'component'
 import {Label} from 'label'
 import {Bouton} from 'bouton'
 import {Champ} from 'champ'
@@ -9,6 +9,11 @@ import {Tableau} from 'tableau'
 export class Ecran extends Component {
     private _components: Component[] = [];
 
+
+    public static ecranCourant() : Ecran {
+        return new Ecran(Sys.Process("MGDIS.LanceurNET").WinFormsObject("FMPortail"));
+    }
+
     constructor(wfo: WinForObj) {
         super(wfo);
         this.parkour(this._wfo);
@@ -18,7 +23,7 @@ export class Ecran extends Component {
         return this._components;
     }
 
-    public myClass(): string {
+    public myClass(): componentType {
         return "Ecran";
     }
 
@@ -47,8 +52,9 @@ export class Ecran extends Component {
         });
     }
 
-    private rechercheFromLabel(nameClass: string, label: string): Component {
+    private rechercheFromLabel(nameClass: componentType, label: string): Component {
         let y: number;
+        let x : number;
         let foundL: boolean = false;
         for (const component of this._components) {
             if (Label.isLabel(component) && component.is(label)) {
@@ -71,12 +77,12 @@ export class Ecran extends Component {
         return aRetourner;
     }
 
-    public rechercheChamp(label: string): Component {
-        return this.rechercheFromLabel("Champ", label);
+    public rechercheChamp(label: string): Champ {
+        return  this.rechercheFromLabel("Champ", label) as Champ;
     }
 
-    public rechercheCombobox(label: string): Component {
-        return this.rechercheFromLabel("Combobox", label);
+    public rechercheCombobox(label: string): Combobox {
+        return this.rechercheFromLabel("Combobox", label) as Combobox;
     }
 
     public rechercheBouton(label: string): Bouton {
@@ -88,8 +94,7 @@ export class Ecran extends Component {
                     found = true;
                     aRetourner = cmpnt;
                 }
-        };
-
+        }
         if (!found) throw ("Pas trouvé de bouton au label : " + label);
 
         return aRetourner;
@@ -102,9 +107,7 @@ export class Ecran extends Component {
         });
         return s;
     }
-
 }
-
 
 export type ComponentConstructor<T extends Component> = new (cmpnt: WinForObj) => T;
 

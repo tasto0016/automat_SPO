@@ -1,14 +1,14 @@
-import { Component } from "component";
+import { Component, componentType } from "component";
 
 
 export class Tableau extends Component {
-    protected _headerTop : ColumnHeader ;
+    protected _header : Header ;
     protected _sheet : Sheet ;
 
     constructor (wfo : WinForObj){
-        super(wfo) ;/*
-        this._sheet = wfo.Sheets.getItem(0) ;
-        this.setColumnHeader();*/
+        super(wfo) ;
+        this._sheet = wfo.Sheets.get_Item(0) ;
+        this.setColumnHeader();
     }
 
     public brille() : void{
@@ -18,26 +18,23 @@ export class Tableau extends Component {
     protected setColumnHeader() : void {
         var n : number = this._sheet.ColumnHeader.Columns.Count ;
         for (var i=0;i<n;i++){
-            this._headerTop[this._sheet.ColumnHeader.GetClip(0,i,1,1)]=i;
+            this._header[this._sheet.ColumnHeader.GetClip(0,i,1,1)]=i;
         }
     }
 
     public toString() : void {
         let message : string = "";
         let n : number = this._sheet.ColumnHeader.Columns.Count ;
-
         for (var i=0; i<n; i++){
         } 
     }
 
-    public myClass() : string{
+    public myClass() : componentType{
         return "Tableau" ;
     }
-
 }
 
-interface ColumnHeader {
+interface Header {
     [columnName : string] : number ;
 
-    
 }

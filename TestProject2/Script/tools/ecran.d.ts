@@ -1,16 +1,19 @@
-import { Component } from 'component';
+import { Component, componentType } from 'component';
 import { Bouton } from 'bouton';
+import { Champ } from 'champ';
+import { Combobox } from 'combobox';
 export declare class Ecran extends Component {
     private _components;
+    static ecranCourant(): Ecran;
     constructor(wfo: WinForObj);
     getComponents(): Component[];
-    myClass(): string;
+    myClass(): componentType;
     private parkour;
     refresh(): void;
     brille(): void;
     private rechercheFromLabel;
-    rechercheChamp(label: string): Component;
-    rechercheCombobox(label: string): Component;
+    rechercheChamp(label: string): Champ;
+    rechercheCombobox(label: string): Combobox;
     rechercheBouton(label: string): Bouton;
     getComponentsToString(): string;
 }
