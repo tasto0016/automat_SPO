@@ -19,7 +19,7 @@ export class Component {
     }
 
     public static isVisible(wfo: WinForObj): boolean {
-        return (wfo.Visible && wfo.VisibleOnScreen);
+        return (wfo.Visible);
     }
 
     public lire(): string {

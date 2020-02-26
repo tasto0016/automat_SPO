@@ -56,28 +56,33 @@ class Ecran extends component_1.Component {
     }
     rechercheFromLabel(nameClass, label) {
         let y;
-        let x;
-        let foundL = false;
+        let x = 0;
+        let x_label;
+        let foundL;
         for (const component of this._components) {
             if (label_1.Label.isLabel(component) && component.is(label)) {
                 y = component.positionY();
-                foundL = true;
+                foundL = component;
+                x_label = component.positionX();
             }
         }
         if (!foundL)
             throw "Pas trouvé de label : " + label;
-        let found = false;
-        var aRetourner;
+        foundL.brille();
+        let aRetourner;
         for (const cmpnt of this._components) {
             if (cmpnt.myClass() == nameClass)
-                if (cmpnt.positionY() == y) {
-                    found = true;
-                    aRetourner = cmpnt;
+                if (Math.abs(cmpnt.positionY() - y) < 5) {
+                    let x_challenger = cmpnt.positionX();
+                    if ((x_challenger > x_label) && (!x || (x_challenger < x))) {
+                        x = cmpnt.positionX();
+                        aRetourner = cmpnt;
+                    }
                 }
             ;
         }
         ;
-        if (!found)
+        if (!aRetourner)
             throw "pas trouvé de champ associé au label : " + label + "\n" + y;
         return aRetourner;
     }

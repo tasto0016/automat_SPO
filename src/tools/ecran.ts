@@ -61,25 +61,31 @@ export class Ecran extends Component {
 
     private rechercheFromLabel(nameClass: componentType, label: string): Component {
         let y: number;
-        let x: number;
-        let foundL: boolean = false;
+        let x: number = 0;
+        let x_label : number;
+        let foundL: Label;
         for (const component of this._components) {
             if (Label.isLabel(component) && component.is(label)) {
                 y = component.positionY();
-                foundL = true;
+                foundL = component;
+                x_label = component.positionX();
             }
         }
         if (!foundL) throw "Pas trouvé de label : " + label;
-        let found: boolean = false;
-        var aRetourner: Component;
+        foundL.brille();
+        let aRetourner: Component;
         for (const cmpnt of this._components) {
             if (cmpnt.myClass() == nameClass)
-                if (cmpnt.positionY() == y) {
-                    found = true;
-                    aRetourner = cmpnt;
+                if (Math.abs(cmpnt.positionY()-y) < 5) { // petite sensibilité de <5 pixel, pour corriger les alignements non parfait.
+                    let x_challenger : number = cmpnt.positionX();
+                    // vérifie que le component est bien à droite du label & qu'il est plus à gauche que le précédent (acceptation automatique si il n'y a pas de précédent)
+                    if( (x_challenger>x_label) && (!x || (x_challenger<x)) ){ 
+                        x = cmpnt.positionX();
+                        aRetourner = cmpnt;
+                    }
                 };
         };
-        if (!found) throw "pas trouvé de champ associé au label : " + label + "\n" + y;
+        if (!aRetourner) throw "pas trouvé de champ associé au label : " + label + "\n" + y;
 
         return aRetourner;
     }

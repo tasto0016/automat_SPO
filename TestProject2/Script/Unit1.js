@@ -8,30 +8,26 @@ function Lanceur(){
   
   
   Log.Message("fen.getComponentsToString()",fen.getComponentsToString());
-  fen.brille();
+  //fen.brille();
   
-  //var chmp = fen.rechercheChamp("Nom commercial");
+  //var chmp = fen.rechercheChamp("Libellé");
   //chmp.brille();
   
- // var chmpLiblOp = fen.rechercheCombobox("Tranche travaux");
-  //chmpLiblOp.brille();
+  var chmpLiblOp = fen.rechercheCombobox("Nature des travaux");
+  chmpLiblOp.brille();
   
-  //var btnAppliquer = fen.rechercheBouton("Appliquer");
-  //btnAppliquer.brille();
+  var btnAppliquer = fen.rechercheBouton("Appliquer");
+  btnAppliquer.brille();
 
   Log.Message("FIN");
    
 }
 
 function test() {
-var cs = Sys.Process("MGDIS.LanceurNET").FindAllChildren("Visible", true,1);
-var c = cs.Find
-var n = cs.length
-Log.Message(n)
-for (var i=0;i<n;i++) {
-  Log.Message(i);
-  if (cs[i].Enabled) Log.Message(cs[i].FullName);
-}
+var x = 0 ;
+Log.Message(!x);
+x = -100
+Log.Message(!x)
 
 }
 

@@ -16,7 +16,7 @@ class Component {
         return new Component(this._wfo);
     }
     static isVisible(wfo) {
-        return (wfo.Visible && wfo.VisibleOnScreen);
+        return (wfo.Visible);
     }
     lire() {
         return this._wfo.WndCaption;
