@@ -72,7 +72,6 @@ export class Ecran extends Component {
             }
         }
         if (!foundL) throw "Pas trouvé de label : " + label;
-        foundL.brille();
         let aRetourner: Component;
         for (const cmpnt of this._components) {
             if (cmpnt.myClass() == nameClass)
