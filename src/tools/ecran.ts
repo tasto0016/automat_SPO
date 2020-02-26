@@ -1,17 +1,22 @@
-import {Component, componentType} from 'component'
-import {Label} from 'label'
-import {Bouton} from 'bouton'
-import {Champ} from 'champ'
-import {Combobox} from 'combobox'
-import {Tableau} from 'tableau'
+import { Component, componentType } from 'component'
+import { Label } from 'label'
+import { Bouton } from 'bouton'
+import { Champ } from 'champ'
+import { Combobox } from 'combobox'
+import { Tableau } from 'tableau'
 
 
 export class Ecran extends Component {
     private _components: Component[] = [];
 
 
-    public static ecranCourant() : Ecran {
-        return new Ecran(Sys.Process("MGDIS.LanceurNET").WinFormsObject("FMPortail"));
+    public static ecranCourant(): Ecran {
+        let tab: WinForObj[] = Sys.Process("MGDIS.LanceurNET").FindAllChildren("Visible", true);
+        let wfo : WinForObj ;
+        for (const obj of tab){
+            if (obj.Enabled) wfo = obj ;
+        }
+        return new Ecran(wfo);
     }
 
     constructor(wfo: WinForObj) {
@@ -28,22 +33,24 @@ export class Ecran extends Component {
     }
 
     private parkour(wfo: WinForObj): void {
-        const type = wfo.GetType().FullName;
-        let constr = componentMappings[type];
-        if (!constr) {
-            let nChild: number = wfo.ChildCount;
-            if (nChild == 0 ) Log.Message("Objet non reconnu","Full name : "+ wfo.Name + " est de type : " + type);            
-                else if (Component.isVisible(wfo) && wfo.Enabled) 
+        if(wfo.Name.includes('WinFormsObject')){
+            const type = wfo.GetType().FullName;
+            let constr = componentMappings[type];
+            if (!constr) {
+                let nChild: number = wfo.ChildCount;
+                if (nChild == 0) Log.Message("Objet non reconnu", "Full name : " + wfo.Name + " est de type : " + type);
+                else if (Component.isVisible(wfo) && wfo.Enabled)
                     for (let i = 0; i < nChild; i++) this.parkour(wfo.Child(i));
-        }else { 
-            const component = new constr(wfo);
-            this._components.push(component); 
-        }                
+            } else {
+                const component = new constr(wfo);
+                this._components.push(component);
+            }
+        }
     }
 
-    public refresh() : void {
-        this._components = [] ;
-        this.parkour(this._wfo); 
+    public refresh(): void {
+        this._components = [];
+        this.parkour(this._wfo);
     }
 
     public brille(): void {
@@ -54,7 +61,7 @@ export class Ecran extends Component {
 
     private rechercheFromLabel(nameClass: componentType, label: string): Component {
         let y: number;
-        let x : number;
+        let x: number;
         let foundL: boolean = false;
         for (const component of this._components) {
             if (Label.isLabel(component) && component.is(label)) {
@@ -78,7 +85,7 @@ export class Ecran extends Component {
     }
 
     public rechercheChamp(label: string): Champ {
-        return  this.rechercheFromLabel("Champ", label) as Champ;
+        return this.rechercheFromLabel("Champ", label) as Champ;
     }
 
     public rechercheCombobox(label: string): Combobox {
@@ -116,10 +123,10 @@ export interface ComponentMapping {
 }
 export const componentMappings: ComponentMapping = {
     'MGDIS.N01.Comp.MGText': Champ,
-    'MGDIS.N01.WinForms.MGTextBox' : Champ,
-    'MGDIS.N01.WinForms.MGNumericBox' : Champ,
-    'MGDIS.N01.WinForms.MGLabel' : Label,
-    'MGDIS.N01.WinForms.MGComboBox' : Combobox,
-    'System.Windows.Forms.Button' : Bouton,
-    'FarPoint.Win.Spread.FpSpread' : Tableau,
+    'MGDIS.N01.WinForms.MGTextBox': Champ,
+    'MGDIS.N01.WinForms.MGNumericBox': Champ,
+    'MGDIS.N01.WinForms.MGLabel': Label,
+    'MGDIS.N01.WinForms.MGComboBox': Combobox,
+    'System.Windows.Forms.Button': Bouton,
+    'FarPoint.Win.Spread.FpSpread': Tableau,
 };

@@ -42,6 +42,7 @@ export class Component {
         return "Component";
     }
 
+
 }
 
 export type componentType = "Component" | "Champ" | "Bouton" | "Combobox" | "Label" | "Tableau" | "Ecran";

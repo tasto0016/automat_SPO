@@ -4,11 +4,11 @@
 function Lanceur(){
   var wfo = Sys.Process("MGDIS.LanceurNET").WinFormsObject("FMPortail").WinFormsObject("tlp_principal").WinFormsObject("tlp_refresh").WinFormsObject("spc_dossier").WinFormsObject("SplitterPanel", "", 2);
   Sys.HighlightObject(wfo);
-  var fen = new file.Ecran(wfo);
-  fen.brille();
+  var fen = file.Ecran.ecranCourant();
+  
   
   Log.Message("fen.getComponentsToString()",fen.getComponentsToString());
-  
+  fen.brille();
   
   //var chmp = fen.rechercheChamp("Nom commercial");
   //chmp.brille();
@@ -24,10 +24,14 @@ function Lanceur(){
 }
 
 function test() {
-  var tab = Sys.Process("MGDIS.LanceurNET").WinFormsObject("FMPortail").WinFormsObject("tlp_principal").WinFormsObject("tlp_refresh").WinFormsObject("spc_dossier").WinFormsObject("SplitterPanel", "", 2).WinFormsObject("tlp_page").WinFormsObject("spc_page").WinFormsObject("SplitterPanel", "", 1).WinFormsObject("ModTranche").WinFormsObject("tlp_principal").WinFormsObject("trancheFicheUC1").WinFormsObject("tlp").WinFormsObject("progTypoLotsPrincipauxUC").WinFormsObject("tlp_Principal").WinFormsObject("spread");
-Log.Message(tab.GetType().FullName);
-//Log.Message(Sys.Process("MGDIS.LanceurNET").WinFormsObject("FMPortail").WinFormsObject("tlp_principal").WinFormsObject("tlp_refresh").WinFormsObject("spc_dossier").WinFormsObject("SplitterPanel", "", 2).WinFormsObject("tlp_page").WinFormsObject("spc_page").WinFormsObject("SplitterPanel", "", 1).WinFormsObject("MGMODM04PROPRIETES").WinFormsObject("tlp_principal").WinFormsObject("TextCP").GetType().FullName);
-Sys.HighlightObject(tab,15,0x000080); //
+var cs = Sys.Process("MGDIS.LanceurNET").FindAllChildren("Visible", true,1);
+var c = cs.Find
+var n = cs.length
+Log.Message(n)
+for (var i=0;i<n;i++) {
+  Log.Message(i);
+  if (cs[i].Enabled) Log.Message(cs[i].FullName);
+}
 
 }
 

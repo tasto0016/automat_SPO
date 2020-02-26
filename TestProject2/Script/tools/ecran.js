@@ -13,7 +13,13 @@ class Ecran extends component_1.Component {
         this.parkour(this._wfo);
     }
     static ecranCourant() {
-        return new Ecran(Sys.Process("MGDIS.LanceurNET").WinFormsObject("FMPortail"));
+        let tab = Sys.Process("MGDIS.LanceurNET").FindAllChildren("Visible", true);
+        let wfo;
+        for (const obj of tab) {
+            if (obj.Enabled)
+                wfo = obj;
+        }
+        return new Ecran(wfo);
     }
     getComponents() {
         return this._components;
@@ -22,19 +28,21 @@ class Ecran extends component_1.Component {
         return "Ecran";
     }
     parkour(wfo) {
-        const type = wfo.GetType().FullName;
-        let constr = exports.componentMappings[type];
-        if (!constr) {
-            let nChild = wfo.ChildCount;
-            if (nChild == 0)
-                Log.Message("Objet non reconnu", "Full name : " + wfo.Name + " est de type : " + type);
-            else if (component_1.Component.isVisible(wfo) && wfo.Enabled)
-                for (let i = 0; i < nChild; i++)
-                    this.parkour(wfo.Child(i));
-        }
-        else {
-            const component = new constr(wfo);
-            this._components.push(component);
+        if (wfo.Name.includes('WinFormsObject')) {
+            const type = wfo.GetType().FullName;
+            let constr = exports.componentMappings[type];
+            if (!constr) {
+                let nChild = wfo.ChildCount;
+                if (nChild == 0)
+                    Log.Message("Objet non reconnu", "Full name : " + wfo.Name + " est de type : " + type);
+                else if (component_1.Component.isVisible(wfo) && wfo.Enabled)
+                    for (let i = 0; i < nChild; i++)
+                        this.parkour(wfo.Child(i));
+            }
+            else {
+                const component = new constr(wfo);
+                this._components.push(component);
+            }
         }
     }
     refresh() {
