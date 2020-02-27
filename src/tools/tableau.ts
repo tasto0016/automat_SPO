@@ -6,9 +6,9 @@ export class Tableau extends Component {
     protected _sheet : Sheet ;
 
     constructor (wfo : WinForObj){
-        super(wfo) ;
+        super(wfo) ;/*
         this._sheet = wfo.Sheets.get_Item(0) ;
-        this.setColumnHeader();
+        this.setColumnHeader();*/
         
     }
 
@@ -23,11 +23,12 @@ export class Tableau extends Component {
         }
     }
 
-    public toString() : void {
-        let message : string = "";
-        let n : number = this._sheet.ColumnHeader.Columns.Count ;
-        for (var i=0; i<n; i++){
-        } 
+    public getNCloumn() : number {
+       return this._wfo.Sheets.get_Item(0).Columns.Count;
+    }
+
+    public getNRow() : number {
+        return this._wfo.Sheets.get_Item(0).Rows.Count;
     }
 
     public myClass() : componentType{

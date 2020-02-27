@@ -134,4 +134,5 @@ export const componentMappings: ComponentMapping = {
     'MGDIS.N01.WinForms.MGComboBox': Combobox,
     'System.Windows.Forms.Button': Bouton,
     'FarPoint.Win.Spread.FpSpread': Tableau,
+    'MGDIS.N01.WinForms.MGDataGridView' : Tableau,
 };

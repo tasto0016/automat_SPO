@@ -12,5 +12,6 @@
 		</folder>
 		<folder name="scenarii" />
 		<child name="Unit1" key="{17702943-4DB3-4F98-88CA-EE356E5A0104}" path="Unit1.js" />
+		<child name="UnitTannie" key="{36179A16-C37D-4ABA-B0B4-10A2BE7522DE}" path="UnitTannie.js" />
 	</children>
 </Root>
