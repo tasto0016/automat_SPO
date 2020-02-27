@@ -4,6 +4,8 @@ const component_1 = require("component");
 class Tableau extends component_1.Component {
     constructor(wfo) {
         super(wfo);
+        this._sheet = wfo.Sheets.get_Item(0);
+        this.setColumnHeader();
     }
     brille() {
         super.brille(0x000080);

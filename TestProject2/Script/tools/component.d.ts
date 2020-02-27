@@ -1,5 +1,5 @@
 export declare class Component {
-    protected _wfo: WinForObj;
+    readonly _wfo: WinForObj;
     getTcName(): string;
     constructor(cmpnt: WinForObj);
     brille(color?: number): void;
