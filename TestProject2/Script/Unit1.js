@@ -13,21 +13,21 @@ function Lanceur(){
   //var chmp = fen.rechercheChamp("Libellé");
   //chmp.brille();
   
-  var chmpLiblOp = fen.rechercheCombobox("Nature des travaux");
-  chmpLiblOp.brille();
+  //var chmpLiblOp = fen.rechercheCombobox("Nature des travaux");
+  //chmpLiblOp.brille();
   
-  var btnAppliquer = fen.rechercheBouton("Appliquer");
-  btnAppliquer.brille();
+  //var btnAppliquer = fen.rechercheBouton("Appliquer");
+  //btnAppliquer.brille();
 
   Log.Message("FIN");
    
 }
 
 function test() {
-var x = 0 ;
-Log.Message(!x);
-x = -100
-Log.Message(!x)
+var x = Sys.Process("MGDIS.LanceurNET").WinFormsObject("FMPortail").WinFormsObject("tlp_principal").WinFormsObject("tlp_refresh").WinFormsObject("spc_dossier").WinFormsObject("SplitterPanel", "", 2).WinFormsObject("tlp_page").WinFormsObject("spc_page").WinFormsObject("SplitterPanel", "", 1).WinFormsObject("ModListeBudget").WinFormsObject("tlp").WinFormsObject("dgv") ;
+Log.Message(x.Child(0).Name);
+Log.Message(x.Child(0).GetType().Name);
+
 
 }
 

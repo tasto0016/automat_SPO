@@ -7,10 +7,9 @@ export class Tableau extends Component {
 
     constructor (wfo : WinForObj){
         super(wfo) ;
-        /*
         this._sheet = wfo.Sheets.get_Item(0) ;
         this.setColumnHeader();
-        */
+        
     }
 
     public brille(): void {

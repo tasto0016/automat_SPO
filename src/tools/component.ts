@@ -1,5 +1,5 @@
 export class Component {
-    protected _wfo: WinForObj;
+    public readonly _wfo: WinForObj;
 
     public getTcName(): string {
         return this._wfo.Name;
