@@ -26,6 +26,10 @@ export class Component {
         return this._wfo.WndCaption;
     }
 
+    public isEnabled(): boolean {
+        return this._wfo.Enabled ;
+    }
+    
     protected size(): number {
         return this._wfo.Width * this._wfo.Height;
     }
