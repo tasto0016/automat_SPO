@@ -33,8 +33,11 @@ declare abstract class WinForObj {
 }
 
 declare abstract class Sheet {
-    public getItem(n : number) : Sheet ;
-    public ColumnHeader : any 
+    public Rows : any;
+    public Columns : any;
+    public ColumnHeader : any
+    public Cells : any; 
+    
 
 }
 
