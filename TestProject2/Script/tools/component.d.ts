@@ -6,6 +6,7 @@ export declare class Component {
     copy(): Component;
     static isVisible(wfo: WinForObj): boolean;
     lire(): string;
+    isEnabled(): boolean;
     protected size(): number;
     positionX(): number;
     positionY(): number;

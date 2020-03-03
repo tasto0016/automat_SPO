@@ -21,6 +21,9 @@ class Component {
     lire() {
         return this._wfo.WndCaption;
     }
+    isEnabled() {
+        return this._wfo.Enabled;
+    }
     size() {
         return this._wfo.Width * this._wfo.Height;
     }
