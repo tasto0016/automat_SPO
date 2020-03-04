@@ -18,7 +18,7 @@ class Component {
     static isVisible(wfo) {
         return (wfo.Visible);
     }
-    lire() {
+    read() {
         return this._wfo.WndCaption;
     }
     isEnabled() {
@@ -38,4 +38,13 @@ class Component {
     }
 }
 exports.Component = Component;
+function clean(s) {
+    let freshOne = "";
+    let n = s.get_Length();
+    for (let i = 0; i < n; i++)
+        if (s.get_Chars(i) > 31 && s.get_Chars(i) < 127)
+            freshOne += s.Substring_2(i, 1);
+    return freshOne;
+}
+exports.clean = clean;
 //# sourceMappingURL=component.js.map

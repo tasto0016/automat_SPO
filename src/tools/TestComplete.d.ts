@@ -30,6 +30,10 @@ declare abstract class WinForObj {
 
     //Tableau
     public Sheets : any ;
+
+    //Cell : FpCell
+    public Text : string ;
+    public Locked : boolean;
 }
 
 declare abstract class Sheet {
@@ -40,6 +44,8 @@ declare abstract class Sheet {
     
 
 }
+
+
 
 declare class Sys {
     public static HighlightObject(object: WinForObj, time: number, color: number): void;

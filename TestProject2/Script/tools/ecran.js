@@ -96,7 +96,7 @@ class Ecran extends component_1.Component {
         var aRetourner;
         for (const cmpnt of this._components) {
             if (cmpnt.myClass() == "Bouton")
-                if (cmpnt.lire() == label) {
+                if (cmpnt.read() == label) {
                     found = true;
                     aRetourner = cmpnt;
                 }
@@ -108,7 +108,7 @@ class Ecran extends component_1.Component {
     getComponentsToString() {
         let s = "Ce que j'ai : " + this._components.length;
         this._components.forEach((element) => {
-            s += "\n" + element.myClass() + " -> " + element.lire();
+            s += "\n" + element.myClass() + " -> " + element.read();
         });
         return s;
     }

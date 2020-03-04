@@ -6,9 +6,13 @@ export declare class Tableau extends Component {
     refresh(): void;
     brille(): void;
     protected setColumnHeader(): void;
-    getCloumnCount(): number;
+    getColumnCount(): number;
     getRowCount(): number;
     myClass(): componentType;
+    getHeader(): Header;
+    getColumn(colonne: number | string): Cell[];
+    getLine(ligne: number | string): Cell[];
+    getNumLineFromName(s: string): number;
     getCell(ligne: string | number, colonne: string | number): Cell;
 }
 interface Header {
@@ -16,5 +20,8 @@ interface Header {
 }
 export declare class Cell extends Component {
     constructor(wfo: WinForObj);
+    read(): string;
+    isEnabled(): boolean;
+    myClass(): componentType;
 }
 export {};

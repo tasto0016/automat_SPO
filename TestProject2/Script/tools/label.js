@@ -15,7 +15,7 @@ class Label extends component_1.Component {
         return "Label";
     }
     is(s) {
-        return this.lire().includes(s);
+        return this.read().includes(s);
     }
 }
 exports.Label = Label;

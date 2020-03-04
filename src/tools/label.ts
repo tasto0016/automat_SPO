@@ -18,7 +18,7 @@ export class Label extends Component {
     }
 
     public is(s: string): boolean {
-        return this.lire().includes(s);
+        return this.read().includes(s);
     }
 
 }

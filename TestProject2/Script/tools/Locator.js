@@ -57,4 +57,4 @@ class ExtEcran extends ecran_1.Ecran {
 class EcranBudget extends ecran_1.Ecran {
 }
 exports.EcranBudget = EcranBudget;
-//# sourceMappingURL=Locator.js.map
+//# sourceMappingURL=locator.js.map
