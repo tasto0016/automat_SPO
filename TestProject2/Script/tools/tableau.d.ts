@@ -12,7 +12,7 @@ export declare class Tableau extends Component {
     getHeader(): Header;
     getColumn(colonne: number | string): Cell[];
     getLine(ligne: number | string): Cell[];
-    getNumLineFromName(s: string): number;
+    getNumLineFromName(s: string, ncol?: number): number;
     getCell(ligne: string | number, colonne: string | number): Cell;
 }
 interface Header {

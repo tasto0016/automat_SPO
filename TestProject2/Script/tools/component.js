@@ -36,6 +36,9 @@ class Component {
     myClass() {
         return "Component";
     }
+    click() {
+        this._wfo.Click();
+    }
 }
 exports.Component = Component;
 function clean(s) {

@@ -9,6 +9,7 @@ declare abstract class WinForObj {
     public WndCaption: string;
     public Width: number;
     public Height: number;
+    public Click(): void;
 
     //Champ call
     public wText: string;
@@ -42,9 +43,7 @@ declare abstract class Sheet {
     public ColumnHeader : any
     public Cells : any; 
     
-
 }
-
 
 
 declare class Sys {

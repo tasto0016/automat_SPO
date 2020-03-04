@@ -9,7 +9,6 @@ import { Tableau } from 'tableau'
 export class Ecran extends Component {
     private _components: Component[] = [];
 
-
     public static ecranCourant(): Ecran {
         let tab: WinForObj[] = Sys.Process("MGDIS.LanceurNET").FindAllChildren("Visible", true);
         let wfo : WinForObj ;

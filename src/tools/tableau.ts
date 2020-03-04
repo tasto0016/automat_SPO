@@ -68,8 +68,8 @@ export class Tableau extends Component {
         return line ;
     }
 
-    public getNumLineFromName(s : string) : number {
-        let col0 : Cell[] = this.getColumn(0);
+    public getNumLineFromName(s : string, ncol : number = 0) : number {
+        let col0 : Cell[] = this.getColumn(ncol);
         return col0.findIndex((value: Cell) => value.read().includes(s));
     }
 

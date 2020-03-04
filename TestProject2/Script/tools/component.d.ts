@@ -11,6 +11,7 @@ export declare class Component {
     positionX(): number;
     positionY(): number;
     myClass(): componentType;
+    click(): void;
 }
 export declare type componentType = "Component" | "Champ" | "Bouton" | "Combobox" | "Label" | "Tableau" | "Ecran" | "Cell";
 export declare function clean(s: any): string;

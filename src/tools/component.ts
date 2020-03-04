@@ -46,6 +46,10 @@ export class Component {
         return "Component";
     }
 
+    public click(): void {
+        this._wfo.Click();
+    }
+
 
 }
 
@@ -56,6 +60,6 @@ export function clean(s : any) : string {
     let n : number = s.get_Length();
     for (let i=0; i<n; i++)
         if (s.get_Chars(i)>31 && s.get_Chars(i)<127) freshOne += s.Substring_2(i,1) ; 
-        
+
     return freshOne ;
 }

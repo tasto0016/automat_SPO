@@ -1,1 +1,1 @@
-{"version":3,"file":"budget.js","sourceRoot":"","sources":["../../../src/tools/budget.ts"],"names":[],"mappings":";;AAAA,uCAA0C;AAE1C,MAAM,aAAc,SAAQ,iBAAO;IAE/B,YAAY,GAAe;QACvB,KAAK,CAAC,GAAG,CAAC,CAAC;IACf,CAAC;CAGJ"}
+{"version":3,"file":"budget.js","sourceRoot":"","sources":["../../../src/tools/budget.ts"],"names":[],"mappings":";;AAAA,uCAA0C;AAE1C,MAAM,aAAc,SAAQ,iBAAO;IAE/B,YAAY,GAAe;QACvB,KAAK,CAAC,GAAG,CAAC,CAAC;IACf,CAAC;CAIJ"}

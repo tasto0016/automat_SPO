@@ -64,8 +64,8 @@ class Tableau extends component_1.Component {
             line.push(new Cell(this._sheet.Cells.get_Item(l, i)));
         return line;
     }
-    getNumLineFromName(s) {
-        let col0 = this.getColumn(0);
+    getNumLineFromName(s, ncol = 0) {
+        let col0 = this.getColumn(ncol);
         return col0.findIndex((value) => value.read().includes(s));
     }
     getCell(ligne, colonne) {
