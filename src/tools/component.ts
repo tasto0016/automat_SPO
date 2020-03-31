@@ -1,3 +1,5 @@
+import { Ecran } from "./ecran";
+
 export class Component {
     public readonly _wfo: WinForObj;
 
@@ -48,8 +50,20 @@ export class Component {
 
     public click(): void {
         this._wfo.Click();
+        //this._wfo.WaitWindow("*","*",1,30*1000);
     }
 
+    public getVisibleOnScreen() : void {
+        var p : WinForObj = this._wfo ;
+        while (! p.VisibleOnScreen){
+            p = p.Parent ;
+        }
+        let delta : number = -Math.sign(p.ScreenTop)*10;
+        if(! this._wfo.VisibleOnScreen) p.HoverMouse(Math.floor( p.Width*0.95),Math.max(-p.ScreenTop,0)+ 1);
+        while(! this._wfo.VisibleOnScreen){
+            p.MouseWheel(delta);
+        }
+    }
 
 }
 
@@ -58,8 +72,9 @@ export type componentType = "Component" | "Champ" | "Bouton" | "Combobox" | "Lab
 export function clean(s : any) : string {
     let freshOne : string = "";
     let n : number = s.get_Length();
-    for (let i=0; i<n; i++)
-        if (s.get_Chars(i)>31 && s.get_Chars(i)<127) freshOne += s.Substring_2(i,1) ; 
-
+    for (let i=0; i<n; i++){
+        let c : number = s.get_Chars(i);
+        if ((c>31 && c<127) || (c>=224 && c<245)) freshOne += s.Substring_2(i,1) ; 
+    }
     return freshOne ;
 }

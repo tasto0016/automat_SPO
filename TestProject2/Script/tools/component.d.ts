@@ -12,6 +12,7 @@ export declare class Component {
     positionY(): number;
     myClass(): componentType;
     click(): void;
+    getVisibleOnScreen(): void;
 }
 export declare type componentType = "Component" | "Champ" | "Bouton" | "Combobox" | "Label" | "Tableau" | "Ecran" | "Cell";
 export declare function clean(s: any): string;

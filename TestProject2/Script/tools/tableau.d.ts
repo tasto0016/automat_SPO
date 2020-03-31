@@ -19,9 +19,15 @@ interface Header {
     [columnName: string]: number;
 }
 export declare class Cell extends Component {
-    constructor(wfo: WinForObj);
+    protected _cell: FpCell;
+    protected _ligne: number;
+    protected _colonne: number;
+    constructor(wfo: WinForObj, x: number, y: number);
     read(): string;
     isEnabled(): boolean;
+    select(): void;
+    write(s: string): void;
+    protected reset(): void;
     myClass(): componentType;
 }
 export {};

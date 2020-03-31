@@ -19,6 +19,7 @@ class Ecran extends component_1.Component {
             if (obj.Enabled)
                 wfo = obj;
         }
+        wfo.setFocus();
         return new Ecran(wfo);
     }
     getComponents() {
@@ -47,6 +48,7 @@ class Ecran extends component_1.Component {
     }
     refresh() {
         this._components = [];
+        this._wfo.Refresh();
         this.parkour(this._wfo);
     }
     brille() {
@@ -83,6 +85,7 @@ class Ecran extends component_1.Component {
         ;
         if (!aRetourner)
             throw "pas trouvé de champ associé au label : " + label + "\n" + y;
+        aRetourner.getVisibleOnScreen();
         return aRetourner;
     }
     rechercheChamp(label) {
@@ -90,6 +93,14 @@ class Ecran extends component_1.Component {
     }
     rechercheCombobox(label) {
         return this.rechercheFromLabel("Combobox", label);
+    }
+    rechercheLabel(label) {
+        for (const component of this._components) {
+            if (label_1.Label.isLabel(component) && component.is(label)) {
+                component.getVisibleOnScreen();
+                return component;
+            }
+        }
     }
     rechercheBouton(label) {
         let found = false;
@@ -103,6 +114,42 @@ class Ecran extends component_1.Component {
         }
         if (!found)
             throw ("Pas trouvé de bouton au label : " + label);
+        aRetourner.getVisibleOnScreen();
+        return aRetourner;
+    }
+    rechercheTableau(label) {
+        if (label == "") {
+            for (const cmpnt of this._components) {
+                if (cmpnt.myClass() == "Tableau")
+                    return cmpnt;
+            }
+        }
+        let y_label;
+        let y = 0;
+        let foundL;
+        for (const component of this._components) {
+            if (label_1.Label.isLabel(component) && component.is(label)) {
+                y_label = component.positionY();
+                foundL = component;
+            }
+        }
+        if (!foundL)
+            throw "Pas trouvé de label : " + label;
+        let aRetourner;
+        for (const cmpnt of this._components) {
+            if (cmpnt.myClass() == "Tableau") {
+                let y_challenger = cmpnt.positionY();
+                if ((y_challenger > y_label) && (!y || (y_challenger < y))) {
+                    y = y_challenger;
+                    aRetourner = cmpnt;
+                }
+                ;
+            }
+            ;
+        }
+        if (!aRetourner)
+            throw "pas trouvé de champ associé au label : " + label + "\n" + y;
+        aRetourner.getVisibleOnScreen();
         return aRetourner;
     }
     getComponentsToString() {
@@ -119,8 +166,10 @@ exports.componentMappings = {
     'MGDIS.N01.WinForms.MGTextBox': champ_1.Champ,
     'MGDIS.N01.WinForms.MGNumericBox': champ_1.Champ,
     'MGDIS.N01.WinForms.MGLabel': label_1.Label,
+    'MGDIS.N01.WinForms.MGLinkLabel': label_1.Label,
     'MGDIS.N01.WinForms.MGComboBox': combobox_1.Combobox,
     'System.Windows.Forms.Button': bouton_1.Bouton,
     'FarPoint.Win.Spread.FpSpread': tableau_1.Tableau,
+    'MGDIS.N01.WinForms.MGDateTime': champ_1.Champ
 };
 //# sourceMappingURL=ecran.js.map

@@ -10,6 +10,10 @@ declare abstract class WinForObj {
     public Width: number;
     public Height: number;
     public Click(): void;
+    public WaitWindow(WndClass : string, WndCaption : string, GroupIndex : number, WaitTime : number) : any ;
+    public Parent : WinForObj;
+    public MouseWheel(Delta : number): void;
+    public HoverMouse(x : number, y : number): void;
 
     //Champ call
     public wText: string;
@@ -25,6 +29,8 @@ declare abstract class WinForObj {
     public Child(n: number): WinForObj;
     public GetType(): any;
     public Enabled: boolean ;
+    public setFocus(): void;
+    public Refresh(): void;
 
     //Combobox
     public ClickItem(valeur: string) : void ;
@@ -32,11 +38,13 @@ declare abstract class WinForObj {
     //Tableau
     public Sheets : any ;
 
-    //Cell : FpCell
-    public Text : string ;
-    public Locked : boolean;
 }
 
+declare abstract class FpCell {
+    public Text : string ;
+    public Locked : boolean;
+
+}
 declare abstract class Sheet {
     public Rows : any;
     public Columns : any;
@@ -49,6 +57,7 @@ declare abstract class Sheet {
 declare class Sys {
     public static HighlightObject(object: WinForObj, time: number, color: number): void;
     public static Process(s : string): any;
+    public static Desktop : any ;
 }
 
 declare class Log{

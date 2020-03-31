@@ -1,8 +1,11 @@
 import {Component, componentType} from 'component'
 
 export class Champ extends Component {
+    protected _validationSaisie : string ;
+
     constructor(wfo: WinForObj) {
         super(wfo);
+        this._validationSaisie = champsStyle[wfo.GetType().FullName];
     }
 
     public copy(): Champ {
@@ -17,12 +20,17 @@ export class Champ extends Component {
         return "Champ";
     }
 
-    public lire(): string {
+    public read(): string {
         return this._wfo.wText;
     }
 
-    public ecrire(s: string): void {
+    public write(s: string): void {
         this._wfo.Keys(s);
+        this.valider();
+    }
+
+    public valider() : void {
+        this._wfo.Keys(this._validationSaisie);
     }
 
     public effacer(): void {
@@ -30,3 +38,14 @@ export class Champ extends Component {
     }
 
 }
+
+
+export interface ChampsMapping {
+    [type: string]: string;
+}
+export const champsStyle: ChampsMapping = {
+    'MGDIS.N01.Comp.MGText':"[Enter]",
+    'MGDIS.N01.WinForms.MGTextBox': "[Enter]",
+    'MGDIS.N01.WinForms.MGNumericBox': "[Enter]",
+    'MGDIS.N01.WinForms.MGDateTime' : "[Tab]"
+};

@@ -46,12 +46,12 @@ class Tableau extends component_1.Component {
         else
             c = this._header[colonne];
         for (let i = 0; i < nL; i++)
-            col.push(new Cell(this._sheet.Cells.get_Item(i, c)));
+            col.push(new Cell(this._wfo, i, c));
         return col;
     }
     getLine(ligne) {
         let line = [];
-        let nL = this.getColumnCount();
+        let nC = this.getColumnCount();
         let l;
         if (typeof ligne === "number")
             if (ligne >= this.getRowCount())
@@ -60,8 +60,8 @@ class Tableau extends component_1.Component {
                 l = ligne;
         else
             l = this.getNumLineFromName(ligne);
-        for (let i = 0; i < nL; i++)
-            line.push(new Cell(this._sheet.Cells.get_Item(l, i)));
+        for (let i = 0; i < nC; i++)
+            line.push(new Cell(this._wfo, l, i));
         return line;
     }
     getNumLineFromName(s, ncol = 0) {
@@ -85,19 +85,41 @@ class Tableau extends component_1.Component {
                 y = colonne;
         else
             y = this._header[colonne];
-        return new Cell(this._sheet.Cells.Get_Item_2(x, y));
+        return new Cell(this._wfo, x, y);
     }
 }
 exports.Tableau = Tableau;
 class Cell extends component_1.Component {
-    constructor(wfo) {
+    constructor(wfo, x, y) {
         super(wfo);
+        this._cell = this._wfo.Sheets.get_Item(0).Cells.get_Item(x, y);
+        this._ligne = x;
+        this._colonne = y;
     }
     read() {
-        return component_1.clean(this._wfo.Text);
+        return component_1.clean(this._cell.Text);
     }
     isEnabled() {
-        return !this._wfo.Locked;
+        return !this._cell.Locked;
+    }
+    select() {
+        this.reset();
+        var track = "";
+        for (var i = 0; i < this._ligne; i++) {
+            track += "[Down]";
+        }
+        for (var j = 0; j < this._colonne; j++) {
+            track += "[Right]";
+        }
+        this._wfo.Keys(track);
+        this._wfo.Keys("[Enter]");
+    }
+    write(s) {
+        this._wfo.Keys(s);
+        this._wfo.Keys("[Enter]");
+    }
+    reset() {
+        this._wfo.Keys("[Hold]^[Home]");
     }
     myClass() {
         return "Cell";

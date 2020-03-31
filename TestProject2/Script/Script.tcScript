@@ -12,6 +12,7 @@
 		</folder>
 		<folder name="scenarii">
 			<child name="scenario1" key="{7E498B17-D5BF-4CF3-A355-DF1C35ED6E5E}" path="scenarii\scenario1.js" />
+			<child name="bon_de_commande" key="{047E5085-E083-4CFB-916F-D9A1DE1F8EA3}" path="scenarii\bon_de_commande.js" />
 		</folder>
 		<child name="Unit1" key="{17702943-4DB3-4F98-88CA-EE356E5A0104}" path="Unit1.js" />
 		<child name="UnitTannie" key="{36179A16-C37D-4ABA-B0B4-10A2BE7522DE}" path="UnitTannie.js" />
